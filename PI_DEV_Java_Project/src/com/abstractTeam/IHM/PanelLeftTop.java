@@ -22,6 +22,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
 
+import com.abstractTeam.Controller.OptionMessage;
 import com.abstractTeam.Controller.RestaurantDao;
 import com.abstractTeam.IHM.GestionRestaurant.ContentRestaurantPanel;
 import com.abstractTeam.Model.Restaurant;
@@ -170,6 +171,14 @@ public class PanelLeftTop extends JPanel {
 		JButton btnNewButton_1 = new JButton("Supprimer");
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if(restaurantIds.isEmpty()){
+					OptionMessage.messageWarning("Erreur", "Il n'ya aucun retaurants");
+				}else{
+					OptionMessage.messageInfo("Suppression", "Voulez vous supprimer ce restaurant");
+					RestaurantDao restaurantDao=new RestaurantDao();
+					restaurantDao.deleteRestaurant(restaurantIds.get(comboBox.getSelectedIndex()));
+					OptionMessage.messageOk("Suppression", "Suppression avec succes");
+				}
 			}
 		});
 		btnNewButton_1.setBounds(225, 265, 89, 23);

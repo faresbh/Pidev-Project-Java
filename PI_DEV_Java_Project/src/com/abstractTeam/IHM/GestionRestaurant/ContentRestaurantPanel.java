@@ -1,15 +1,14 @@
 package com.abstractTeam.IHM.GestionRestaurant;
 
 import java.awt.BorderLayout;
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,17 +25,19 @@ import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-
-import org.jfree.chart.title.TextTitle;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import com.abstractTeam.Controller.PhotoDao;
 import com.abstractTeam.Controller.RestaurantDao;
-import com.abstractTeam.IHM.ApplicationFrame;
 import com.abstractTeam.IHM.PanelLeftTop;
 import com.abstractTeam.Model.Photo;
 import com.abstractTeam.Model.Positiongeo;
 import com.abstractTeam.Model.Restaurant;
 import com.abstractTeam.Model.Restaurateur;
+import com.jtattoo.plaf.aluminium.AluminiumLookAndFeel;
+
+import de.javasoft.plaf.synthetica.SyntheticaLookAndFeel;
 
 
 
@@ -51,17 +52,38 @@ public class ContentRestaurantPanel extends JPanel {
 	public static JButton btnNewButtonEffacer;
 	public static JButton btnNewButtonModifier;
 	public JPanel thisJPanel=this;
-	public static BufferedImage backgroundImage;
+	public static Image backgroundImage;
 	public static int idRestaurant;
 	/**
 	 * Create the panel.
 	 */
 	public ContentRestaurantPanel(final int idRestaurant) {
+		try {
+			UIManager.setLookAndFeel("com.jtattoo.plaf.aluminium.AluminiumLookAndFeel");
+		} catch (ClassNotFoundException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		} catch (InstantiationException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		} catch (IllegalAccessException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		} catch (UnsupportedLookAndFeelException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		  try {
+				 backgroundImage = ImageIO.read(new File("img\\liv.jpg"));
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		setBackground(Color.WHITE);
 		System.out.println(idRestaurant+"3adi");
 		this.idRestaurant=idRestaurant;
 		System.out.println(this.idRestaurant+"qsdqsdqsd");
 		final JPanel panel = new JPanel();
-		setBackground(Color.LIGHT_GRAY);
+		panel.setOpaque(false);
 		setLayout(null);
 		comboBoxImages = new JComboBox();
 		comboBoxImages.setEnabled(false);
@@ -70,6 +92,7 @@ public class ContentRestaurantPanel extends JPanel {
 		final DefaultComboBoxModel dt=new DefaultComboBoxModel();
 		comboBoxImages.setModel(dt);
 		JLabel label = new JLabel("Nom Restaurant :");
+		label.setForeground(Color.RED);
 		label.setBounds(10, 14, 135, 14);
 		add(label);
 		
@@ -79,6 +102,7 @@ public class ContentRestaurantPanel extends JPanel {
 		add(textFieldNomRestaurant);
 		
 		JLabel label_1 = new JLabel("Mail :");
+		label_1.setForeground(Color.RED);
 		label_1.setBounds(10, 61, 46, 14);
 		add(label_1);
 		
@@ -88,6 +112,7 @@ public class ContentRestaurantPanel extends JPanel {
 		add(textFieldMail);
 		
 		JLabel label_2 = new JLabel("Mot de passe :");
+		label_2.setForeground(Color.RED);
 		label_2.setBounds(10, 109, 124, 14);
 		add(label_2);
 		
@@ -97,6 +122,7 @@ public class ContentRestaurantPanel extends JPanel {
 		add(textFieldMpw);
 		
 		JLabel label_3 = new JLabel("Confirmer mot de passe :");
+		label_3.setForeground(Color.RED);
 		label_3.setBounds(10, 155, 146, 14);
 		add(label_3);
 		
@@ -106,19 +132,25 @@ public class ContentRestaurantPanel extends JPanel {
 		add(textFieldMpw2);
 		
 		JLabel label_4 = new JLabel("Nombre Table :");
+		label_4.setForeground(Color.RED);
 		label_4.setBounds(10, 205, 134, 14);
 		add(label_4);
 		
 		JLabel label_5 = new JLabel("Adresse :");
+		label_5.setForeground(Color.RED);
 		label_5.setBounds(10, 298, 124, 14);
 		add(label_5);
 		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(155, 293, 216, 116);
+		add(scrollPane_1);
+		
 		final JTextArea textAreaAdresse1 = new JTextArea();
-		textAreaAdresse1.setBounds(155, 293, 216, 116);
-		add(textAreaAdresse1);
+		scrollPane_1.setViewportView(textAreaAdresse1);
 	
 		
 		JLabel lblAdresseGeolocalisation = new JLabel("Adresse Geolocalisation :");
+		lblAdresseGeolocalisation.setForeground(Color.RED);
 		lblAdresseGeolocalisation.setBounds(6, 429, 150, 14);
 		add(lblAdresseGeolocalisation);
 		
@@ -134,6 +166,7 @@ public class ContentRestaurantPanel extends JPanel {
 		add(btnParcourirMap);
 		
 		JLabel lblSpcialit = new JLabel("Sp\u00E9cialit\u00E9 :");
+		lblSpcialit.setForeground(Color.RED);
 		lblSpcialit.setBounds(10, 254, 134, 14);
 		add(lblSpcialit);
 		
@@ -327,6 +360,7 @@ public class ContentRestaurantPanel extends JPanel {
 		add(btnNewButtonModifier);
 		
 		JLabel lblImages = new JLabel("Images :");
+		lblImages.setForeground(Color.RED);
 		lblImages.setBounds(6, 470, 63, 14);
 		add(lblImages);
 		
@@ -365,11 +399,7 @@ public class ContentRestaurantPanel extends JPanel {
         f.pack();
         f.setLocationRelativeTo(null);
         f.setVisible(true);
-        try {
-			 backgroundImage = ImageIO.read(new File("img\\retaurant.jpg"));
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
+      
     }
 	public void paintComponent(final Graphics g) {
 

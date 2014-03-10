@@ -24,6 +24,7 @@ import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 import com.abstractTeam.Controller.IngredientDao;
+import com.abstractTeam.Controller.OptionMessage;
 import com.abstractTeam.Model.Ingredient;
 import com.abstractTeam.Model.Photo;
 import javax.swing.JTextPane;
@@ -64,7 +65,8 @@ public class FrameAddIngredient extends javax.swing.JFrame {
         textPaneNom = new JTextPane();
         jLabel1.setText("jLabel1");
       myFrame=this;
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+      setLocationRelativeTo(null);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ingredients");
  
         jButton1.setText("Browse");
@@ -188,6 +190,7 @@ public class FrameAddIngredient extends javax.swing.JFrame {
         return Toolkit.getDefaultToolkit().createImage(bufferedImage.getSource());
     }
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) { 
+    	if(!textPaneNom.getText().equals("")&&!textArea.getText().equals("")&&!image.getAbsolutePath().equals("")){
     	Ingredient ingredient=new Ingredient();
     	ingredient.setLabel(textPaneNom.getText());
     	PanelPlat.model.addElement(textPaneNom.getText());
@@ -210,7 +213,9 @@ public class FrameAddIngredient extends javax.swing.JFrame {
 //    	ContentRestaurantPanel.btnNewButtonModifier.setEnabled(true);
 //    	ContentRestaurantPanel.comboBoxImages.addItem(image.getAbsolutePath());
 //    	}
-      
+    	}else{
+    		OptionMessage.messageWarning("Erreur", "Il faut remplir les champs");
+    	}
     }                                       
  
     private static BufferedImage resizeImage(BufferedImage originalImage, int type) {

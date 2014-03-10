@@ -50,6 +50,8 @@ public class PanelPlat extends JPanel {
 	public static DefaultListModel listImageModel;
 	public static List<Plat> listNewPlat;
 	public static boolean modif=false;
+	public JButton buttonAjouterImage;
+	public JButton btnVoirImages;
 	// public static Vector<String> vectors;
 	/**
 	 * Create the panel.
@@ -136,7 +138,7 @@ public class PanelPlat extends JPanel {
 		lblIngredients.setBounds(10, 262, 80, 14);
 		add(lblIngredients);
 		btnAjouter = new JButton("Ajouter");
-		btnAjouter.setForeground(new Color(0, 128, 0));
+		btnAjouter.setForeground(Color.BLACK);
 		btnAjouter.setOpaque(false);
 		btnAjouter.setContentAreaFilled(false);
 		btnAjouter.setBorderPainted(false);
@@ -159,7 +161,7 @@ public class PanelPlat extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				if (!textFieldNom.getText().equals("")
 						&& !textFieldPrix.getText().equals("")
-						&& !textArea.getText().equals("")) {
+						&& !textArea.getText().equals("")&&FramePlat.ingredients.isEmpty()&&listImageModel.isEmpty()) {
 					int result=OptionMessage.messageInfo("Ajout Plat", "Voulez vous ajouter ce plat");
 					if(result==JOptionPane.OK_OPTION){
 					Plat plat = new Plat();
@@ -219,7 +221,7 @@ public class PanelPlat extends JPanel {
 			}
 		});
 
-		JButton buttonAjouterImage = new JButton("Ajouter image");
+	buttonAjouterImage = new JButton("Ajouter image");
 		buttonAjouterImage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				AjouterImageNewPlat ajouterImageNewPlat = new AjouterImageNewPlat();
@@ -227,13 +229,13 @@ public class PanelPlat extends JPanel {
 			}
 		});
 		buttonAjouterImage.setOpaque(false);
-		buttonAjouterImage.setForeground(new Color(0, 128, 0));
+		buttonAjouterImage.setForeground(Color.BLACK);
 		buttonAjouterImage.setContentAreaFilled(false);
 		buttonAjouterImage.setBorderPainted(false);
 		buttonAjouterImage.setBounds(228, 358, 121, 23);
 		add(buttonAjouterImage);
 
-		JButton btnVoirImages = new JButton("Voir images");
+		btnVoirImages = new JButton("Voir images");
 		btnVoirImages.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				List<ImageIcon> imageIcons = new ArrayList<ImageIcon>();
@@ -245,7 +247,7 @@ public class PanelPlat extends JPanel {
 			}
 		});
 		btnVoirImages.setOpaque(false);
-		btnVoirImages.setForeground(new Color(0, 128, 0));
+		btnVoirImages.setForeground(Color.BLACK);
 		btnVoirImages.setContentAreaFilled(false);
 		btnVoirImages.setBorderPainted(false);
 		btnVoirImages.setBounds(240, 391, 109, 23);
@@ -254,7 +256,7 @@ public class PanelPlat extends JPanel {
 		Image imgOk = iconOk.getImage();
 		image = imgOk.getScaledInstance(327, 324, java.awt.Image.SCALE_SMOOTH);
 		try {
-			backgroundImage = ImageIO.read(new File("img\\plat2.png"));
+			backgroundImage = ImageIO.read(new File("img\\platy.jpg"));
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}

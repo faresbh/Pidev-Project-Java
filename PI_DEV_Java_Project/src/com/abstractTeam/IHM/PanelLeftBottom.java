@@ -14,8 +14,10 @@ import javax.swing.border.TitledBorder;
 
 import GestionReservation.PanelReservations;
 
+import com.abstractTeam.Controller.OptionMessage;
 import com.abstractTeam.IHM.BonPlan.PanelChoisirBonPlan;
 import com.abstractTeam.IHM.GestionLivraison.PanelLivraison;
+import com.abstractTeam.IHM.GestionRestaurant.ContentRestaurantPanel;
 import com.abstractTeam.IHM.GestionRestaurant.MenueRestaurantPanel;
 import com.abstractTeam.IHM.client.PanelTop5Plats;
 
@@ -120,6 +122,9 @@ public class PanelLeftBottom extends JPanel {
 		JButton btnGestionMenus = new JButton("Gestion Menus");
 		btnGestionMenus.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(PanelLeftTop.restaurantIds.isEmpty()){
+				OptionMessage.messageWarning("Attention", "Il n'y a aucun restaurant dans votre compte");	
+				}else{
 				ApplicationFrame.content.remove(ApplicationFrame.panelContenu);
 
 				ApplicationFrame.panelContenu= new MenueRestaurantPanel();
@@ -127,7 +132,7 @@ public class PanelLeftBottom extends JPanel {
 				ApplicationFrame.content.validate();
 				ApplicationFrame.content.repaint();
 //				PanelMenu.content.setVisible(false);
-			}
+			}}
 		});
 		btnGestionMenus.setHorizontalAlignment(SwingConstants.LEFT);
 		btnGestionMenus.setFont(new Font("Tahoma", Font.PLAIN, 15));

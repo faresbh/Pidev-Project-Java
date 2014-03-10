@@ -42,7 +42,7 @@ public class MenueRestaurantPanel extends JPanel {
 	public static DefaultListModel defaultListModel;
 	public static List<Menus> menus;
 	public static List<Plat> plats;
-	BufferedImage backgroundImage;
+Image backgroundImage;
 	public static int selectedPlat;
 	public static JComboBox comboBoxMenue;
 	public static JLabel lblPlat_1;
@@ -151,7 +151,7 @@ public class MenueRestaurantPanel extends JPanel {
 		}
 			}
 		});
-		btnSupprimerMenu.setBounds(224, 158, 115, 23);
+		btnSupprimerMenu.setBounds(190, 158, 205, 23);
 		add(btnSupprimerMenu);
 		lblPlat_1.setVisible(false);
 		MenueDao menueDao=new MenueDao();
@@ -169,6 +169,7 @@ public class MenueRestaurantPanel extends JPanel {
 		listPlats.setVisible(true);
 		lblPlat.setVisible(true);
 		buttonajouterPlat.setVisible(true);
+		btnSupprimerMenu.setVisible(true);
 //		co
 		comboBoxMenue.setVisible(true);
 		plats=menus.get(comboBoxMenue.getSelectedIndex()).getPlats();
@@ -186,6 +187,7 @@ public class MenueRestaurantPanel extends JPanel {
 			lblMenu.setVisible(false);
 			lblPlat.setVisible(false);
 			buttonajouterPlat.setVisible(false);
+			btnSupprimerMenu.setVisible(false);
 		}
 //		ListSelectionModel listSelectionModel=listPlats.getSelectionModel();
 //		listSelectionModel.addListSelectionListener(new ListSelectionListener() {

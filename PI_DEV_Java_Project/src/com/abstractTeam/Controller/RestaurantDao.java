@@ -8,13 +8,26 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.abstractTeam.Model.Bonplan;
 import com.abstractTeam.Model.Note;
 import com.abstractTeam.Model.Photo;
 import com.abstractTeam.Model.Restaurant;
 
 public class RestaurantDao {
 	
-	
+	public int deleteRestaurant(int id){
+	     int resultat = 0;
+		String requete = "delete from restaurants where id= "+id;
+	        try {
+	            PreparedStatement ps = MyConnection.getInstance().prepareStatement(requete);
+	             resultat = ps.executeUpdate();
+	           
+	        } catch (SQLException ex) {
+	           //Logger.getLogger(PersonneDao.class.getName()).log(Level.SEVERE, null, ex);
+	          System.out.println("erreur lors de la recherche du bn "+ex.getMessage());
+	        }
+			return resultat;
+	    }
 	
 	
 	public Restaurant getRestoById(int id){

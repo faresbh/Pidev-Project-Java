@@ -25,7 +25,7 @@ public class PlatDao {
 	public List<Plat> findPlatsByReservation(int id) {
 		List<Plat> list = new ArrayList<Plat>();
 		try {
-			connection = MyConnection.getInstance();
+			connection = ConnexionDB.getConnected();
 			Statement statPlatinf = connection.createStatement();
 			System.out.println(id);
 			String req = "SELECT * FROM infoPlats where idReservation=" + id;

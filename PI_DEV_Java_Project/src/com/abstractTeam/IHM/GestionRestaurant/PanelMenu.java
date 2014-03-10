@@ -39,8 +39,8 @@ public class PanelMenu extends JPanel {
 		setLayout(null);
 		setBounds(131, 319, 267, 255);
 		setOpaque(false);
-		JLabel lblNom = new JLabel("Nom :");
-		lblNom.setBounds(28, 22, 46, 14);
+		JLabel lblNom = new JLabel("Nom Menu :");
+		lblNom.setBounds(0, 22, 73, 14);
 		add(lblNom);
 
 		JButton btnAjouterPlat = new JButton("Ajouter Plat");
@@ -88,7 +88,7 @@ public class PanelMenu extends JPanel {
 		textField.setOpaque(false);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(27, 71, 171, 114);
+		scrollPane.setBounds(27, 71, 171, 77);
 		add(scrollPane);
 		listPlats = new JList();
 		scrollPane.setViewportView(listPlats);
@@ -96,8 +96,9 @@ public class PanelMenu extends JPanel {
 		JButton btnAjouterMenu = new JButton("Ajouter menu");
 		btnAjouterMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
-				if (!textField.equals("")) {
+				if(listPlats.getModel().getSize()==0){
+					OptionMessage.messageWarning("Attention", "il n'y a aucun plat dans votre menu");
+				}else if (!textField.equals("")) {
 					int result = OptionMessage.messageInfo("Ajouter menue",
 							"Voulez vous ajouter ce menu");
 					if (result == JOptionPane.OK_OPTION) {
@@ -122,7 +123,7 @@ public class PanelMenu extends JPanel {
 				}
 			}
 		});
-		btnAjouterMenu.setBounds(28, 196, 131, 23);
+		btnAjouterMenu.setBounds(28, 148, 131, 23);
 		add(btnAjouterMenu);
 		modelPlats = new DefaultListModel();
 		listPlats.setModel(modelPlats);
