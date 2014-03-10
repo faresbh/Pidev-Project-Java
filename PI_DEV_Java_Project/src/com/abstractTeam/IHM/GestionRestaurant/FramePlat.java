@@ -131,6 +131,8 @@ public static boolean choice = true;
 		JButton btnOk = new JButton("Ok");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if(!contentPane.textArea.getText().equals("")&&!contentPane.textFieldNom.getText().equals("")&&!contentPane.textFieldPrix.getText().equals("")){
+//				if(pan)
 				int result=OptionMessage.messageInfo("Ajout Plat", "Voulez vous ajouter ce plat");
 				if(result==JOptionPane.OK_OPTION){
 				Plat plat=new Plat();
@@ -145,7 +147,11 @@ public static boolean choice = true;
 				MenueRestaurantPanel.defaultListModel.addElement(plat);
 				MenueRestaurantPanel.plats.add(plat);
 				
-				}}
+				}
+				}else{
+					OptionMessage.messageWarning("Erreur", "Il faut saisir tous les champs");
+				}
+			}
 		});
 		btnOk.setBounds(56, 471, 89, 23);
 		contentPane.add(btnOk);
@@ -189,6 +195,9 @@ public static boolean choice = true;
 		btnVoirImage.setBounds(284, 389, 89, 23);
 		contentPane.add(btnVoirImage);
 				if(i!=-1){
+					contentPane.btnAjouter.setVisible(false);
+					contentPane.btnVoirImages.setVisible(false);
+					contentPane.buttonAjouterImage.setVisible(false);
 					IngredientDao ingredientDao=new IngredientDao();
 					plat=MenueRestaurantPanel.plats.get(i);
 

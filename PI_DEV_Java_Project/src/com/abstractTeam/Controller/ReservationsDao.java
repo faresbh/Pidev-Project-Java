@@ -99,7 +99,9 @@ public class ReservationsDao {
 	public List<Reservation> findAllReservations() {
 		List<Reservation> list = new ArrayList<Reservation>();
 		try {
+
 			connection = ConnexionDB.getConnected();
+
 			Statement statReservation = connection.createStatement();
 			String req = "SELECT * FROM reservations ";
 			ResultSet resReservation = statReservation.executeQuery(req);
