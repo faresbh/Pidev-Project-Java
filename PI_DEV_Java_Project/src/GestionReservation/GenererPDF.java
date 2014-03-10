@@ -1,6 +1,5 @@
 package GestionReservation;
 
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -37,9 +36,8 @@ public class GenererPDF extends JFrame {
 			// - Connexion à la base
 			connection = ConnexionDB.getConnected();
 			// - Chargement et compilation du rapport
-			System.out.println("oci");
-			JasperDesign jasperDesign = JRXmlLoader
-					.load("doc/report4.jrxml");
+			
+			JasperDesign jasperDesign = JRXmlLoader.load("doc/report4.jrxml");
 			JasperReport jasperReport = JasperCompileManager
 					.compileReport(jasperDesign);
 			// - Paramètres à envoyer au rapport

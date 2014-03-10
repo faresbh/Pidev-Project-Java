@@ -7,6 +7,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
+
 import com.abstractTeam.Model.Restaurateur;
 
 
@@ -111,7 +121,7 @@ public class RestaurateurDAO {
 	    }
 	 public Restaurateur findRestaurateurByMailMdp(String mail,String mdp){
 
-	        String requete = "select * from restaurateurs where mail=? && mdp=?";
+	        String requete = "select * from restaurateurs where mail=? && mdp=? ";
 
 	        try{
 	        PreparedStatement ps = MyConnection.getInstance().prepareStatement(requete);
@@ -129,6 +139,7 @@ public class RestaurateurDAO {
 	            Restaurateur.setMdp(resultat.getString(5));
 	            Restaurateur.setAdresse(resultat.getString(6));
 	            Restaurateur.setTel(resultat.getString(7));
+	            Restaurateur.setStatut(resultat.getString(8));
 	        }
 	        return Restaurateur;
 	        }
@@ -263,5 +274,49 @@ public void supprimerRestaurateur(int id){
 		}
 }
 
+public void EnvoyerMail(Restaurateur restaurateur) {
+	
+	final String username = "espritabstractteam@gmail.com";
+	final String password = "abstractteam";
+
+	
+	RestaurateurDAO restaurateurdao = new RestaurateurDAO();
+
+
+	Properties props = new Properties();
+	props.put("mail.smtp.auth", "true");
+	props.put("mail.smtp.starttls.enable", "true");
+	props.put("mail.smtp.host", "smtp.gmail.com");
+	props.put("mail.smtp.port", "587");
+
+	Session session = Session.getInstance(props,
+	  new javax.mail.Authenticator() {
+		protected PasswordAuthentication getPasswordAuthentication() {
+			return new PasswordAuthentication(username, password);
+		}
+	  });
+
+	try {
+
+		Message message = new MimeMessage(session);
+		message.setFrom(new InternetAddress("espritabstractteam@gmail.com"));
+		message.setRecipients(Message.RecipientType.TO,
+			InternetAddress.parse(restaurateur.getMail()));
+		message.setSubject("Confirmation Compte Restaurateur");
+		message.setText("voila compte restaurateur < "+restaurateur.getNom()+" >  a été validé par l'administrateur");
+		
+		Transport.send(message);
+
+		System.out.println("Done");
+		JOptionPane.showMessageDialog(null, "Message Envoyé!!");
+
+	
+}catch ( Exception e)
+{
+	e.printStackTrace();
+}
+
+
+}
 
 }

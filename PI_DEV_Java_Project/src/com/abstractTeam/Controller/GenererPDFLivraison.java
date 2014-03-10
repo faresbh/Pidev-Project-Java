@@ -38,7 +38,7 @@ public class GenererPDFLivraison extends JFrame {
 			// - Chargement et compilation du rapport
 			System.out.println("oci");
 			JasperDesign jasperDesign = JRXmlLoader
-					.load("doc/report5.jrxml");
+					.load("C:\\Users\\FaresP\\report5.jrxml");
 			JasperReport jasperReport = JasperCompileManager
 					.compileReport(jasperDesign);
 			// - Paramètres à envoyer au rapport

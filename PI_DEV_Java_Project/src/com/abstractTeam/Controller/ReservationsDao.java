@@ -26,7 +26,7 @@ public class ReservationsDao {
 	public void AjouterReservation(Reservation reservation) {
 
 		try {
-			connection = MyConnection.getInstance();
+			connection = ConnexionDB.getConnected();
 
 			PreparedStatement req = connection
 					.prepareStatement("insert into reservations(choix, date, idFacture, idClient , idResto) "
@@ -58,7 +58,7 @@ public class ReservationsDao {
 	}
 
 	public int ModifierReservation(Reservation reservation) {
-		connection = MyConnection.getInstance();
+		connection =ConnexionDB.getConnected();
 		int x =0;
 		try {
 			Statement requete = connection.createStatement();
@@ -81,7 +81,7 @@ public class ReservationsDao {
 	}
 
 	public int SupprimeReservation(Reservation reservation) {
-		connection = MyConnection.getInstance();
+		connection = ConnexionDB.getConnected();
 		int x=0;
 		try {
 			Statement requete = connection.createStatement();
@@ -99,7 +99,7 @@ public class ReservationsDao {
 	public List<Reservation> findAllReservations() {
 		List<Reservation> list = new ArrayList<Reservation>();
 		try {
-			connection = MyConnection.getInstance();
+			connection = ConnexionDB.getConnected();
 			Statement statReservation = connection.createStatement();
 			String req = "SELECT * FROM reservations ";
 			ResultSet resReservation = statReservation.executeQuery(req);
@@ -215,8 +215,9 @@ public class ReservationsDao {
 		Reservation reservation = new Reservation();
 		
 		try {
-			connection = MyConnection.getInstance();
+			connection = ConnexionDB.getConnected();
 			Statement statReservation = connection.createStatement();
+
 			String req = "SELECT * FROM reservations where idReservation="+id;
 			ResultSet resReservation = statReservation.executeQuery(req);
 

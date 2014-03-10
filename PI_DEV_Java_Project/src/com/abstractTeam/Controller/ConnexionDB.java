@@ -12,7 +12,7 @@ public class ConnexionDB {
 	public static String url = "jdbc:mysql://localhost:3306/";
 	public static String bd="abtractteam";
 	public static String login = "root";
-	public static String pass = "root";
+	public static String pass = "";
 	
 	static public Connection getConnected() {
 		Connection connection = null;

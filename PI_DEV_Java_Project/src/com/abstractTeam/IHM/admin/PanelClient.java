@@ -68,6 +68,7 @@ public class PanelClient extends JPanel {
 				client.setStatut("valide");
 				dao.UpdateClient(client);
 				//rafraichir
+				dao.EnvoyerMail(client);
 				ApplicationFrame.content.remove(ApplicationFrame.panelContenu);
 				ApplicationFrame.panelContenu= new PanelClient(1);
 				ApplicationFrame.content.add(ApplicationFrame.panelContenu);

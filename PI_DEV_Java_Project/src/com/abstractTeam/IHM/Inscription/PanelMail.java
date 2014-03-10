@@ -54,6 +54,7 @@ public class PanelMail extends JPanel {
 		JButton btnRetour = new JButton("Retour");
 		btnRetour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				ConnectionFrame.f.dispose();
 				ConnectionFrame connectionFrame=new ConnectionFrame();
 				connectionFrame.frmRestoTunisie.setVisible(true);
 				
@@ -66,14 +67,16 @@ public class PanelMail extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				
 			mail=textFieldMail.getText();
-				Restaurateur rest=new Restaurateur();
+				Restaurateur rest=null;
 				RestaurateurDAO restaurateurDAO=new RestaurateurDAO();
 			rest=	restaurateurDAO.findRestaurateurByMail(mail);
-				if (!(textFieldMail.getText().equals(rest.getMail()))) {
+			
+			if ( rest== null )
+			{
+//				if (!(mail.equals(rest.getMail()))) {
 					
-					
-					JOptionPane.showMessageDialog(null, "vous n'êtes pas inscrit");
-				}
+				JOptionPane.showMessageDialog(null, "vous n'êtes pas inscrit");
+			}
 				else {
 					
 				
@@ -131,9 +134,10 @@ public class PanelMail extends JPanel {
 				}// TODO Auto-generated method stub
 
 			}
+			}
 			
 		}
-			}
+			
 	);
 		
 	}
